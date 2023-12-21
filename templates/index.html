@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Marvel Character Image Generator</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Helvetica', sans-serif; /* Change to Helvetica or the desired font */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 72px; /* Three times bigger than the original size */
+        }
+
+        #generateBtn {
+            font-size: 24px; /* Adjust the font size as needed */
+        }
+
+        #result {
+            border: 1px solid white; /* Optional: Add a white border around the result div */
+            padding: 10px; /* Optional: Add padding to the result div */
+            text-align: center; /* Center text inside the result div */
+        }
+
+        #character {
+            font-size: 36px; /* Adjust the font size for the generated text */
+        }
+
+        #image {
+            border: 1px solid white; /* Optional: Add a white border around the image */
+            margin-top: 10px; /* Optional: Add margin to the top of the image */
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Perfect Hero Is...</h1>
+    <button id="generateBtn">Generate Image</button>
+    <div id="result">
+        <p id="character"></p>
+        <img id="image" src="" alt="Generated Image" style="max-width: 500px;">
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#generateBtn").click(function() {
+                $.get("/generate", function(data) {
+                    $("#character").text(data.character);
+                    $("#image").attr("src", data.image_url);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
